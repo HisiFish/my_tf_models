@@ -332,8 +332,9 @@ def main(unused_args):
       mode=tf.estimator.ModeKeys.TRAIN,
       tfrecord_pattern=FLAGS.training_data,
       batch_size=FLAGS.batch_size)
-      
-  estimator.train(input_fn=train_input_fn, max_steps=FLAGS.train_steps)  
+  
+  prf_hook = tf.train.ProfilerHook(10, None, 'tpu_out')
+  estimator.train(input_fn=train_input_fn, max_steps=FLAGS.train_steps, hooks=[prf_hook, ])  
   
   #estimator = tf.estimator.Estimator(
   #    model_fn=model_fn,

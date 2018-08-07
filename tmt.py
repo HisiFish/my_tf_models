@@ -231,14 +231,18 @@ def model_fn(features, labels, mode, params):
       tf.nn.sparse_softmax_cross_entropy_with_logits(
           labels=labels, logits=logits))
   # Add the optimizer.
-  train_op = tf.contrib.layers.optimize_loss(
-      loss=cross_entropy,
-      global_step=tf.train.get_global_step(),
-      learning_rate=params.learning_rate,
-      optimizer="Adam",
-      # some gradient clipping stabilizes training in the beginning.
-      clip_gradients=params.gradient_clipping_norm,
-      summaries=["learning_rate", "loss", "gradients", "gradient_norm"])
+  #train_op = tf.contrib.layers.optimize_loss(
+  #    loss=cross_entropy,
+  #    global_step=tf.train.get_global_step(),
+  #    learning_rate=params.learning_rate,
+  #    optimizer="Adam",
+  #    # some gradient clipping stabilizes training in the beginning.
+  #    clip_gradients=params.gradient_clipping_norm,
+  #    summaries=["learning_rate", "loss", "gradients", "gradient_norm"])
+  optimizer = tf.train.GradientDescentOptimizer(learning_rate=params.learning_rate)
+  optimizer = tf.contrib.tpu.CrossShardOptimizer(optimizer)
+  train_op=optimizer.minimize(loss, tf.train.get_global_step())
+  
   # Compute current predictions.
   predictions = tf.argmax(logits, axis=1)
   return tf.estimator.EstimatorSpec(

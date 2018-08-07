@@ -241,7 +241,7 @@ def model_fn(features, labels, mode, params):
   #    summaries=["learning_rate", "loss", "gradients", "gradient_norm"])
   optimizer = tf.train.GradientDescentOptimizer(learning_rate=params.learning_rate)
   optimizer = tf.contrib.tpu.CrossShardOptimizer(optimizer)
-  train_op=optimizer.minimize(loss, tf.train.get_global_step())
+  train_op=optimizer.minimize(cross_entropy, tf.train.get_global_step())
   
   # Compute current predictions.
   predictions = tf.argmax(logits, axis=1)

@@ -136,8 +136,8 @@ def model_fn(features, labels, mode, params):
     shapes = features["shape"]
     # lengths will be [batch_size]
     lengths = tf.squeeze(
-        tf.slice(shapes, begin=[0, 0], size=[params.batch_size, 1]))
-    inks = tf.reshape(features["ink"], [params.batch_size, -1, 3])
+        tf.slice(shapes, begin=[0, 0], size=[8, 1]))
+    inks = tf.reshape(features["ink"], [8, -1, 3])
     if labels is not None:
       labels = tf.squeeze(labels)
     return inks, lengths, labels

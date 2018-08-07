@@ -320,7 +320,7 @@ def main(unused_args):
       use_tpu=FLAGS.use_tpu,
       train_batch_size=FLAGS.batch_size,
       eval_batch_size=FLAGS.batch_size,
-      params={"data_dir": FLAGS.data_dir},
+      params={"data_dir": FLAGS.data_dir, "batch_size": FLAGS.batch_size},
       config=run_config)  
   
   train_input_fn = get_input_fn(

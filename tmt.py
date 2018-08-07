@@ -75,7 +75,7 @@ def get_input_fn(mode, tfrecord_pattern, batch_size):
     parsed_features["ink"] = tf.sparse_tensor_to_dense(parsed_features["ink"])
     return parsed_features, labels
 
-  def _input_fn():
+  def _input_fn(params=None):
     """Estimator `input_fn`.
 
     Returns:
@@ -320,7 +320,7 @@ def main(unused_args):
       use_tpu=FLAGS.use_tpu,
       train_batch_size=FLAGS.batch_size,
       eval_batch_size=FLAGS.batch_size,
-      params={"data_dir": FLAGS.data_dir, "batch_size": FLAGS.batch_size},
+      params={"data_dir": FLAGS.data_dir,},
       config=run_config)  
   
   train_input_fn = get_input_fn(

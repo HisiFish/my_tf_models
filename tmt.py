@@ -254,7 +254,7 @@ def create_estimator_and_specs(run_config):
   model_params = tf.contrib.training.HParams(
       num_layers=FLAGS.num_layers,
       num_nodes=FLAGS.num_nodes,
-      batch_size=FLAGS.batch_size,
+      #batch_size=FLAGS.batch_size,
       num_conv=ast.literal_eval(FLAGS.num_conv),
       conv_len=ast.literal_eval(FLAGS.conv_len),
       num_classes=get_num_classes(),

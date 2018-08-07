@@ -452,14 +452,14 @@ if __name__ == "__main__":
   # Model specific parameters
   parser.add_argument("--data_dir", default="",
                          help="Path to directory containing the MNIST dataset")
-  parser.add_argument("train_steps", default=1000, help="Total number of training steps.")
-  parser.add_argument("eval_steps", default=0,
+  parser.add_argument("--train_steps", default=1000, help="Total number of training steps.")
+  parser.add_argument("--eval_steps", default=0,
                           help="Total number of evaluation steps. If `0`, evaluation "
                           "after training is skipped.")  
-  parser.add_argument("use_tpu", default=True, help="Use TPUs rather than plain CPUs")
-  parser.add_argument("iterations", default=50,
+  parser.add_argument("--use_tpu", default=True, help="Use TPUs rather than plain CPUs")
+  parser.add_argument("--iterations", default=50,
                           help="Number of iterations per TPU training loop.")
-  parser.add_argument("num_shards", default=8, help="Number of shards (TPU chips).")
+  parser.add_argument("--num_shards", default=8, help="Number of shards (TPU chips).")
   
   FLAGS, unparsed = parser.parse_known_args()
   tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
